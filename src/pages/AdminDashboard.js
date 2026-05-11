@@ -291,69 +291,91 @@ const AdminDashboard = () => {
           )}
 
           {/* ================= ORDERS ================= */}
-          {activeTab === 'orders' && (
-            <div className="space-y-4">
-              {orders.map(order => (
-                <div key={order.order_id} className="border-2 border-slate-50 rounded-3xl p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <span className="text-xs font-bold text-slate-400 uppercase">
-                        Order ID: #{order.order_id}
-                      </span>
-                      <h3 className="font-fredoka text-xl">
-                        {order.customer_name}
-                      </h3>
-
-                      {/* formatted date */}
-                      <p className="text-sm text-slate-500">
-                        {order.order_date
-                          ? order.order_date.split('T')[0].split('-').slice(1).concat(
-                              order.order_date.split('T')[0].split('-')[0]
-                            ).join('/')
-                          : 'N/A'}
-                      </p>
-                    </div>
-
-                    {/* status badge */}
-                    <span className={`px-4 py-1 rounded-full text-xs font-bold uppercase`}>
-                      {order.status || 'Pending'}
-                    </span>
-                  </div>
-
-                  <div className="grid md:grid-cols-3 gap-6 py-4 border-y border-slate-50">
-                    <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase mb-1">
-                        Theme
-                      </p>
-                      <p className="font-bold">
-                        {order.theme_name || 'Custom'}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase mb-1">
-                        Price
-                      </p>
-                      <p className="text-amber-600 font-bold text-lg">
-                        ${parseFloat(order.total_price || 0).toFixed(2)}
-                      </p>
-                    </div>
-
-                    {/* actions */}
-                    <div className="flex gap-2 justify-end">
-                      <button onClick={() => handleUpdateStatus(order.order_id, 'approve')}>
-                        <CheckCircle />
-                      </button>
-                      <button onClick={() => handleUpdateStatus(order.order_id, 'reject')}>
-                        <XCircle />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+{activeTab === 'orders' && (
+  <div className="space-y-6">
+    {orders.map(order => (
+      <div key={order.order_id} className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
+        
+        {/* Header */}
+        <div className="mb-6">
+          <h2 className="font-fredoka text-2xl text-slate-900 mb-2">Order Summary</h2>
+          <div className="flex gap-6 text-sm text-slate-500 font-medium">
+            <div className="flex items-center gap-2">
+              <Calendar size={16} className="text-amber-500" />
+              <span>Date: {order.order_date ? order.order_date.split('T')[0] : '05/27/2026'}</span>
             </div>
-          )}
+            <div className="flex items-center gap-2">
+              <Users size={16} className="text-amber-500" />
+              <span>Guests: {order.guest_count || 20}</span>
+            </div>
+          </div>
+        </div>
 
+        {/* Detailed Breakdown */}
+        <div className="space-y-4 border-t border-slate-50 pt-6">
+          
+          {/* Theme & Venue */}
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="font-fredoka text-lg text-slate-900">Theme</p>
+              <p className="text-slate-600">{order.theme_name || 'Superhero Adventure'}</p>
+              <p className="text-sm text-slate-400">Venue — {order.venue_name || 'Social Play HAUS'}</p>
+            </div>
+            <span className="font-fredoka text-lg text-slate-900">$900.00</span>
+          </div>
+
+          {/* Packages */}
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="font-fredoka text-lg text-slate-900">Packages</p>
+              <p className="text-slate-600">— Superhero Basic Kit</p>
+            </div>
+            <span className="font-fredoka text-lg text-slate-900">$300.00</span>
+          </div>
+
+          {/* Services */}
+          <div className="flex justify-between items-start">
+            <div>
+              <p className="font-fredoka text-lg text-slate-900">Services</p>
+              <p className="text-slate-600">— Sweet Dreams NY</p>
+            </div>
+            <span className="font-fredoka text-lg text-slate-900">$300.00</span>
+          </div>
+
+          {/* Total */}
+          <div className="flex justify-between items-center bg-amber-50 p-6 rounded-2xl mt-4">
+            <span className="font-fredoka text-xl text-slate-900">Total Estimate</span>
+            <span className="font-fredoka text-3xl text-amber-500">
+              ${parseFloat(order.total_price || 1500).toFixed(2)}
+            </span>
+          </div>
+        </div>
+
+        {/* Status & Actions */}
+        <div className="mt-8 flex items-center justify-between border-t border-slate-50 pt-6">
+          <div className="flex items-center gap-2 text-amber-600 font-bold text-sm bg-amber-50 px-4 py-2 rounded-full">
+            <span className="animate-pulse">⏳</span> Pending Admin Approval
+          </div>
+          
+          <div className="flex gap-3">
+            <button 
+              onClick={() => handleUpdateStatus(order.order_id, 'approve')}
+              className="bg-green-500 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 hover:bg-green-600 transition-all"
+            >
+              <CheckCircle size={20} /> Approve
+            </button>
+            <button 
+              onClick={() => handleUpdateStatus(order.order_id, 'reject')}
+              className="bg-red-500 text-white px-6 py-3 rounded-2xl font-bold flex items-center gap-2 hover:bg-red-600 transition-all"
+            >
+              <XCircle size={20} /> Reject
+            </button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
           {/* Remaining tabs (themes, venues, services, packages) unchanged UI structure */}
         </div>
       </div>
