@@ -2,7 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { 
-  CheckCircle, XCircle, Trash2, Package, MapPin, Wrench, Sparkles, Pencil, X, ExternalLink, Image as ImageIcon
+  CheckCircle, 
+  XCircle, 
+  Trash2, 
+  Package, 
+  MapPin, 
+  Wrench, 
+  Sparkles, 
+  Pencil, 
+  X, 
+  ExternalLink, 
+  Image as ImageIcon,
+  Calendar, // Add this
+  Users     // Add this (you'll likely need it for the guest count)
 } from 'lucide-react';
 import { toast } from 'sonner';
 import api from '../services/api';
