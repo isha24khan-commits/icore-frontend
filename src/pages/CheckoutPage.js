@@ -146,9 +146,10 @@ const CheckoutPage = () => {
                   <Calendar size={20} className="text-purple-500" />
                   <div>
                     <p className="font-nunito text-xs text-slate-500 uppercase tracking-wide">Date</p>
-                 {/* Change this in your date display section */}
 <p className="font-nunito font-bold text-slate-900">
-  {order.event_date ? order.event_date.split('T')[0] : 'TBD'}
+  {order.event_date 
+    ? new Date(order.event_date).toLocaleDateString('en-US', { timeZone: 'UTC' }) 
+    : 'TBD'}
 </p>
                   </div>
                 </div>
