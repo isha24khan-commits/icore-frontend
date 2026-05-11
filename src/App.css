@@ -1,0 +1,106 @@
+/* Main app wrapper alignment */
+.App {
+  text-align: left;
+}
+
+/* App logo sizing */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none; /* prevents clicking/dragging logo */
+}
+
+/* Only animate logo if user allows motion */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* Logo rotation animation */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   ADMIN GRID LAYOUT
+   Responsive card grid
+========================= */
+
+/* Main admin grid container */
+.admin-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* =========================
+   ADMIN CARD (BBOX)
+========================= */
+
+/* Card container for admin items */
+.admin-bbox {
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover effect for admin cards */
+.admin-bbox:hover {
+  transform: translateY(-5px);
+  border-color: #fbbf24;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Image inside admin card */
+.bbox-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Content section inside card */
+.bbox-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+/* Description text with line clamp */
+.bbox-desc {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 8px;
+
+  /* limit to 3 lines with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+/* Delete button positioned on top-right of card */
+.bbox-delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  background: white;
+  color: #ef4444;
+  padding: 8px;
+  border-radius: 50%;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}

@@ -1,0 +1,236 @@
+/* Import Google Fonts: Fredoka (headings) + Nunito (body text) */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* Load Tailwind base layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   GLOBAL DESIGN TOKENS
+   ========================= */
+:root {
+  --background: #FAFAFA;         /* main app background */
+  --surface: #FFFFFF;            /* card / panel background */
+  --primary: #F59E0B;            /* main brand color */
+  --primary-hover: #D97706;      /* hover state for primary */
+  --secondary-accent-1: #8B5CF6; /* purple accent */
+  --secondary-accent-2: #3B82F6; /* blue accent */
+  --text-primary: #1E293B;       /* main text color */
+  --text-secondary: #475569;     /* secondary text color */
+  --border: #E2E8F0;             /* default border color */
+}
+
+/* =========================
+   GLOBAL BASE STYLES
+   ========================= */
+body {
+  margin: 0;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+/* Font utility for headings */
+.font-fredoka {
+  font-family: 'Fredoka', sans-serif;
+}
+
+/* Font utility for body text */
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Gradient text utility used in headings */
+.gradient-text {
+  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =========================
+   CARD INTERACTION STYLE
+   ========================= */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+/* lift effect on hover */
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   PRIMARY BUTTON STYLE
+   ========================= */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+  transition: all 0.2s ease;
+}
+
+/* primary hover state */
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
+}
+
+/* click feedback */
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   SECONDARY BUTTON STYLE
+   ========================= */
+.btn-secondary {
+  background-color: #EEF2FF;
+  color: #4F46E5;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s ease;
+}
+
+/* hover state */
+.btn-secondary:hover {
+  background-color: #E0E7FF;
+}
+
+/* glass effect header (blur + transparency) */
+.glass-header {
+  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+/* =========================
+   TAILWIND THEME OVERRIDES
+   ========================= */
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 91% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 263 70% 66%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 38 92% 50%;
+    --radius: 1.5rem;
+    --chart-1: 38 92% 50%;
+    --chart-2: 217 91% 60%;
+    --chart-3: 263 70% 66%;
+    --chart-4: 142 71% 45%;
+    --chart-5: 0 84% 60%;
+  }
+}
+
+/* Apply global Tailwind base styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Fix debug wrapper layout issue (dev tool fix) */
+@layer base {
+  [data-debug-wrapper="true"] {
+    display: contents !important;
+  }
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+/* fade-in animation */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* fade keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* slide-up animation */
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+/* slide keyframes */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   BENTO GRID SYSTEM
+   ========================= */
+
+/* large grid tile (2x2) */
+.bento-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* medium grid tile (2x1) */
+.bento-medium {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+/* small grid tile (1x1) */
+.bento-small {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+/* mobile fallback: all items become single column */
+@media (max-width: 768px) {
+  .bento-large,
+  .bento-medium,
+  .bento-small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}

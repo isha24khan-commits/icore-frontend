@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Character encoding for proper text rendering -->
+        <meta charset="utf-8" />
+
+        <!-- Ensures responsive design on mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Sets the browser theme color (mainly for mobile UI bars) -->
+        <meta name="theme-color" content="#000000" />
+
+        <!-- Short description used by search engines and previews -->
+        <meta name="description" content="iCoreCelebrations" />
+
+        <!-- Preconnect improves font loading performance by establishing early connection -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <!-- Google Font (Inter SemiBold 600) used throughout the app -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Browser tab title -->
+        <title>iCoreCelebrations</title>
+
+        <!-- Favicon shown in browser tab -->
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+
+        <!--
+            Global error handler script:
+            - Listens for runtime errors in the browser
+            - Specifically filters out a known harmless React/Performance API bug
+            - Prevents crash or console spam from DOMException: DataCloneError
+        -->
+        <script>
+            window.addEventListener(
+                "error",
+                function (e) {
+                    // Ignore specific PerformanceServerTiming cloning error
+                    if (
+                        e.error instanceof DOMException &&
+                        e.error.name === "DataCloneError" &&
+                        e.message &&
+                        e.message.includes("PerformanceServerTiming")
+                    ) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                    }
+                },
+                true
+            );
+        </script>
+    </head>
+
+    <body>
+        <!-- Message shown if JavaScript is disabled in browser -->
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+
+        <!-- React root mount point (your entire frontend app renders here) -->
+        <div id="root"></div>
+    </body>
+</html>
